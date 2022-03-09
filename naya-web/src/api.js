@@ -1,5 +1,5 @@
 export const signInAPICall = (data) => {
-  return fetch('https://multiplayer-test-backend-3towjekr2q-ue.a.run.app/api/login', {
+  return fetch('http://localhost:8080/api/login', {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -14,12 +14,12 @@ export const signInAPICall = (data) => {
 }
 
 export const exploreAPICall = () => {
-  return fetch('https://multiplayer-test-backend-3towjekr2q-ue.a.run.app/api/allSketches', {
+  return fetch('http://localhost:8080/api/allSketches', {
     method: "GET",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      'Access-Control-Allow-Origin': 'https://multiplayer-test-backend-3towjekr2q-ue.a.run.app/'
+      'Access-Control-Allow-Origin': 'http://localhost:8080/'
     }
   }).then(response => {
     return response.json();
@@ -28,7 +28,7 @@ export const exploreAPICall = () => {
 }
 
 export const metadataAPICall = async (data) => {
-  return fetch('https://multiplayer-test-backend-3towjekr2q-ue.a.run.app/api/metaData', {
+  return fetch('http://localhost:8080/api/metaData', {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -43,7 +43,7 @@ export const metadataAPICall = async (data) => {
 }
 
 export const updateSketchAPICall = async (data) => {
-  return await fetch('https://multiplayer-test-backend-3towjekr2q-ue.a.run.app/api/updateSketch', {
+  return await fetch('http://localhost:8080/api/updateSketch', {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -58,7 +58,7 @@ export const updateSketchAPICall = async (data) => {
 }
 
 export const editAPICall = (data) => {
-  return fetch('https://multiplayer-test-backend-3towjekr2q-ue.a.run.app/api/sketchWithUserInfo', {
+  return fetch('http://localhost:8080/api/sketchWithUserInfo', {
     method: "POST",
     headers: {
       Accept: "application/json",

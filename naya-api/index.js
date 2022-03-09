@@ -9,12 +9,7 @@ const cors = require('cors');
 
 const PORT = 8080;
 
-var io = require('socket.io')(http, {
-  cors: {
-    origin: "*",
-    methods: ["GET", "POST"]
-  }
-})
+var io = require('socket.io')(http)
 dotenv.config();
 app.use(cors());
 app.use(morgan('dev'));

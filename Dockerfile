@@ -14,6 +14,7 @@ RUN cd naya-api && npm install && cd ..
 #container exposed network port number
 EXPOSE 3000
 EXPOSE 8080
-ENV MONGO_URI=mongodb://mongo:27017
+#uncomment below when using mongodb from local
+ENV MONGO_URI="mongodb+srv://surya:surya@cluster0.ijpqd.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 #command to run within the container
 CMD npm run dev

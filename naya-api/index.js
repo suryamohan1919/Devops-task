@@ -11,6 +11,7 @@ const PORT = 8080;
 
 var io = require('socket.io')(http, {
   cors: {
+    origin: "*",
     methods: ["GET", "POST"]
   }
 })

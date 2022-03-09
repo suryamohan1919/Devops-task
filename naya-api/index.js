@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const PORT = process.env.PORT || 8080;
+const PORT = 8080;
 
 var io = require('socket.io')(http, {
   cors: {

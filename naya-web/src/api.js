@@ -1,6 +1,9 @@
-require('dotenv').config();
+const dten = require('dotenv')
+const WEBURL = https://naya-web-moffh24q7a-uc.a.run.app;
+const APIURL = https://naya-api-moffh24q7a-uc.a.run.app;
+ 
 export const signInAPICall = (data) => {
-  return fetch(process.env.APIURL+'/api/login', {
+  return fetch(APIURL+'/api/login', {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -15,12 +18,12 @@ export const signInAPICall = (data) => {
 }
 
 export const exploreAPICall = () => {
-  return fetch(process.env.APIURL+'/api/allSketches', {
+  return fetch(APIURL+'/api/allSketches', {
     method: "GET",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      'Access-Control-Allow-Origin': process.env.APIURL+'/'
+      'Access-Control-Allow-Origin': APIURL+'/'
     }
   }).then(response => {
     return response.json();
@@ -29,7 +32,7 @@ export const exploreAPICall = () => {
 }
 
 export const metadataAPICall = async (data) => {
-  return fetch(process.env.APIURL+'/api/metaData', {
+  return fetch(APIURL+'/api/metaData', {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -44,7 +47,7 @@ export const metadataAPICall = async (data) => {
 }
 
 export const updateSketchAPICall = async (data) => {
-  return await fetch(process.env.APIURL+'/api/updateSketch', {
+  return await fetch(APIURL+'/api/updateSketch', {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -59,7 +62,7 @@ export const updateSketchAPICall = async (data) => {
 }
 
 export const editAPICall = (data) => {
-  return fetch(process.env.APIURL+'/api/sketchWithUserInfo', {
+  return fetch(APIURL+'/api/sketchWithUserInfo', {
     method: "POST",
     headers: {
       Accept: "application/json",

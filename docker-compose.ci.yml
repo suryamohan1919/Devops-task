@@ -1,0 +1,10 @@
+version: "3"
+services:
+  naya-api:
+    image: "gcr.io/${PROJECT_ID}/naya-api"
+  naya-web:
+    image: "gcr.io/${PROJECT_ID}/naya-web"
+networks:
+  default:
+    external:
+      name: cloudbuild

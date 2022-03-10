@@ -1,20 +1,14 @@
 FROM node:16
 #Creating a new directory for app files and setting path in the container
-RUN mkdir -p /usr/src/app
+RUN mkdir -p /usr/src/app/api
 #setting working directory in the container
-WORKDIR /usr/src/app
+WORKDIR /usr/src/app/api
 #copying the package.json file(contains dependencies) from project source dir to container dir
-COPY package.json /usr/src/app
+COPY . /usr/src/app/api
 # installing the dependencies into the container
 RUN npm install
-#copying the source code of Application into the container dir
-COPY . /usr/src/app
-RUN cd naya-web && npm install && cd ..
-RUN cd naya-api && npm install && cd ..
 #container exposed network port number
-EXPOSE 3000
 EXPOSE 8080
-#uncomment below when using mongodb from local
 ENV MONGO_URI="mongodb+srv://surya:surya@cluster0.ijpqd.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 #command to run within the container
-CMD npm run dev
+CMD npm start

@@ -10,5 +10,9 @@ RUN npm install
 #container exposed network port number
 EXPOSE 8080
 ENV MONGO_URI="mongodb+srv://surya:surya@cluster0.ijpqd.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+ARG weburl
+ENV REACT_APP_WEBURL=$weburl
+ARG apiurl
+ENV REACT_APP_APIURL=$apiurl
 #command to run within the container
 CMD npm start

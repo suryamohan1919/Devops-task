@@ -1,5 +1,5 @@
-const WEBURL = https://naya-web-moffh24q7a-uc.a.run.app;
-const APIURL = https://naya-api-moffh24q7a-uc.a.run.app;
+const WEBURL = "https://naya-web-moffh24q7a-uc.a.run.app" ;
+const APIURL = "https://naya-api-moffh24q7a-uc.a.run.app";
  
 export const signInAPICall = (data) => {
   return fetch(APIURL+'/api/login', {

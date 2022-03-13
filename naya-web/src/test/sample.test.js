@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-const WEBURL = "https://naya-web-moffh24q7a-uc.a.run.app/" ;
+const WEBURL = process.env.REACT_APP_WEBURL ; 
 const APIURL = process.env.REACT_APP_APIURL ;
 
 const escapeXpathString = str => {

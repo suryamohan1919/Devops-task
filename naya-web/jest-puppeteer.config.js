@@ -2,6 +2,7 @@ module.exports = {
     launch: {
         headless: true,
         slowMo: false,
-        devtools: true
+        devtools: true,
+	args: ['--no-sandbox'],
     }
 }

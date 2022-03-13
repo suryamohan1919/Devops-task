@@ -1,12 +1,12 @@
-version: "1"
+version: "3"
 services:
   naya-api:
     build:
       context: naya-api
       dockerfile: Dockerfile
-    working_dir: /naya-api
+    working_dir: /usr/src/app/api
     ports:
-      "8080:8080"
+      - "127.0.0.1:8080:8080"
     env_file:
       - .env
     restart: unless-stopped
@@ -14,9 +14,9 @@ services:
     build:
       context: naya-web
       dockerfile: Dockerfile
-    working_dir: /naya-web
+    working_dir: /usr/src/app/web
     ports:
-      "3000:3000"
+      - "127.0.0.1:3000:3000"
     env_file:
       - .env
     restart: unless-stopped

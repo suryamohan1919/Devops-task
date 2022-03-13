@@ -3,6 +3,7 @@
 const WEBURL = process.env.REACT_APP_WEBURL ;
 const APIURL = process.env.REACT_APP_APIURL ;
 export const signInAPICall = (data) => {
+  console.log(APIURL, '/api/login')
   return fetch(APIURL+'/api/login', {
     method: "POST",
     headers: {

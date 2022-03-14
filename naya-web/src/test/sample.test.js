@@ -78,7 +78,7 @@ describe('Naya', () => {
     await clickBtnByText(page,"Your Favourite Color?");
     const clrobj = await page.$('#rc-editable-input-2');
     await clrobj.click({ clickCount: 3 })
-    await clrobj.type("#223344");
+    await clrobj.type("#234567");
     //await page.screenshot({path: 'screenshot.png'})
     await clickBtnByText(page,"Your Favourite Color?");
     const escapedText = escapeXpathString("Your Favourite Color?");
@@ -89,7 +89,7 @@ describe('Naya', () => {
   } else {
     throw new Error(`Color Button not found: ${text}`);
   }
-    expect(rgb2hex(clrvalue)).toBe("#223344")
+    expect(rgb2hex(clrvalue)).toBe("#234567")
     
   })
 

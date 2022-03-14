@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer');
-const WEBURL = "https://naya-web-moffh24q7a-uc.a.run.app/" ;
-//const WEBURL = process.env.REACT_APP_WEBURL ; 
+//const WEBURL = "https://naya-web-moffh24q7a-uc.a.run.app/" ;
+const WEBURL = process.env.REACT_APP_WEBURL ; 
 const APIURL = process.env.REACT_APP_APIURL ;
 
 const rgb2hex = (rgb) => `#${rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/).slice(1).map(n => parseInt(n, 10).toString(16).padStart(2, '0')).join('')}`
@@ -97,7 +97,8 @@ describe('Naya', () => {
     
   })
 
-  /* it('Login should succeeds and CreateSketch button exists', async () => {
+  it('Login should succeeds and CreateSketch button exists', async () => {
+    await clickBtnByText(page,"Login")
     await clickBtnByText(page,"Login")
     console.log("login button clicked and waiting for navigation")
     await page.waitForNavigation()
@@ -123,7 +124,7 @@ describe('Naya', () => {
     await skchname.type("testSketch");
     await clickBtnByText(page,"Save")
     await page.waitForXPath(`//button[contains(text(), "Logout")]`)
-  }) */
+  })
 
   afterAll(async () => {
     await clickBtnByText(page,"Logout");

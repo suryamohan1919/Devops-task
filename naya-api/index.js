@@ -35,13 +35,17 @@ io.on('connection', (socket)=> {
 })
 
 
-http.listen(PORT, function () {
+var server = http.listen(PORT, function () {
   console.log(`Example app listening on port ${PORT}!`);
 });
+
+server.on('close', function () {   
+    mongoose.connection.close()
+  });
 
 // server.listen(app.get('port'))
 const profileRoutes = require('./routes/profile');
 const sketchRoutes = require('./routes/sketch');
 app.use("/api", profileRoutes);
 app.use("/api", sketchRoutes);
-
+module.exports = server;

@@ -58,6 +58,7 @@ describe('Naya', () => {
   it('Username and password fields present in homepage', async () => {
     const usrobj = await page.$('input[placeholder=Username]');
     const pwdobj = await page.$('input[placeholder=Password]');
+    console.log("Username and Password fields exist");
   })
 
   it('Username and password values set when typed into form', async () => {
@@ -68,6 +69,7 @@ describe('Naya', () => {
     await pwdobj.click({ clickCount: 3 })
     await pwdobj.type("surya");
     await usrobj.click()
+    console.log("username and password typed into form")
     let usrvalue = await page.evaluate(x => x.value, usrobj)
     let pwdvalue = await page.evaluate(x => x.value, pwdobj)
     expect(usrvalue).toBe("surya")
@@ -81,15 +83,16 @@ describe('Naya', () => {
     await clrobj.type("#234567");
     //await page.screenshot({path: 'screenshot.png'})
     await clickBtnByText(page,"Your Favourite Color?");
+    console.log("Color set")
     const escapedText = escapeXpathString("Your Favourite Color?");
     const Btns = await page.$x(`//button[contains(text(), ${escapedText})]`);
     let clrvalue;
   if (Btns.length > 0) {
-    clrvalue = await page.evaluate(x => x.style.background, Btns[0])
+    clrvalue = await page.evaluate(x => x.style.backgroundColor, Btns[0])
   } else {
     throw new Error(`Color Button not found: ${text}`);
   }
-    expect(rgb2hex(clrvalue)).toBe("#223344")
+    expect(rgb2hex(clrvalue)).toBe("#234567")
     
   })
 

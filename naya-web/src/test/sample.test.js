@@ -99,7 +99,7 @@ describe('Naya', () => {
 
   it('Login should succeeds and CreateSketch button exists', async () => {
     await clickBtnByText(page,"Login")
-    await clickBtnByText(page,"Login")
+    //await clickBtnByText(page,"Login")
     console.log("login button clicked and waiting for navigation")
     await page.waitForNavigation()
     await page.waitForXPath(`//button[contains(text(), "Logout")]`)

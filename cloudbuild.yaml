@@ -1,0 +1,95 @@
+timeout: 1800s
+steps:
+- id: nayaapi-build
+  name: node:16
+  dir: naya-api
+  entrypoint: npm
+  args: [install]
+- id: nayaweb-build
+  name: node:16
+  dir: naya-web
+  entrypoint: npm
+  args: [install]
+- id: nayaapi-docker
+  name: gcr.io/cloud-builders/docker
+  args: [ 'build', '-t', 'gcr.io/naya-343516/naya-api', '-f', 'naya-api/Dockerfile', 'naya-api', '--build-arg', 'weburl=${_WEBURL}',  '--build-arg', 'apiurl=${_APIURL}']
+  waitFor: [nayaapi-build]
+- id: nayaweb-docker
+  name: gcr.io/cloud-builders/docker
+  args: [ 'build', '-t', 'gcr.io/naya-343516/naya-web', '-f', 'naya-web/Dockerfile', 'naya-web', '--build-arg', 'weburl=${_WEBURL}',  '--build-arg', 'apiurl=${_APIURL}' ]
+  waitFor: [nayaweb-build]
+- id: nayaapi-docker-push
+  name: gcr.io/cloud-builders/docker
+  args: [ 'push', 'gcr.io/naya-343516/naya-api' ]
+  waitFor: [nayaapi-docker]
+- id: nayaweb-docker-push
+  name: gcr.io/cloud-builders/docker
+  args: [ 'push', 'gcr.io/naya-343516/naya-web' ]
+  waitFor: [nayaweb-docker]
+- id: docker-compose
+  name: 'docker/compose'
+  args: ['-f', 'docker-compose.yml', '-f', 'docker-compose.ci.yml', 'up', '-d']
+  env:
+    - 'PROJECT_ID=$PROJECT_ID'
+  waitFor: [nayaapi-docker-push, nayaweb-docker-push]
+- id: api-tests
+  name: node:16
+  entrypoint: bash 
+  args: ["./test-runner.sh", "api-tests"]
+  waitFor: [docker-compose]
+- id: e2e-tests
+  name: node:16
+  entrypoint: bash 
+  args: ["./test-runner.sh", "e2e-tests"]
+  waitFor: [api-tests]
+- id: docker-compose-down
+  name: 'docker/compose'
+  args: ['-f', 'docker-compose.yml', '-f', 'docker-compose.ci.yml', 'down']
+  env:
+    - 'PROJECT_ID=$PROJECT_ID'
+  waitFor: [e2e-tests]
+  
+- id: nayaapi-deploy
+  name: gcr.io/cloud-builders/gcloud
+  args:
+      [
+        "run",
+        "deploy",
+        "naya-api",
+        "--image",
+        "gcr.io/$PROJECT_ID/naya-api",
+        "--region",
+        "us-central1",
+        "--platform",
+        "managed",
+        "--port=8080",
+        "--memory", "3G",
+        "--min-instances","1",
+        "--allow-unauthenticated",
+      ]
+  waitFor: [e2e-tests]
+- id: nayaweb-deploy
+  name: gcr.io/cloud-builders/gcloud
+  args:
+      [
+        "run",
+        "deploy",
+        "naya-web",
+        "--image",
+        "gcr.io/$PROJECT_ID/naya-web",
+        "--region",
+        "us-central1",
+        "--platform",
+        "managed",
+        "--port=3000",
+        "--memory", "3G",
+        "--min-instances","1",
+        "--allow-unauthenticated",
+      ]
+  waitFor: [e2e-tests]
+images:
+- 'gcr.io/$PROJECT_ID/naya-web'
+- 'gcr.io/$PROJECT_ID/naya-api'
+substitutions:
+    _WEBURL: "https://naya-web-moffh24q7a-uc.a.run.app" 
+    _APIURL: "https://naya-api-moffh24q7a-uc.a.run.app"

@@ -85,7 +85,7 @@ describe('Naya', () => {
     const Btns = await page.$x(`//button[contains(text(), ${escapedText})]`);
     let clrvalue;
   if (Btns.length > 0) {
-    clrvalue = await page.evaluate(x => x.style.background, Btns[0])
+    clrvalue = await page.evaluate(x => x.style.backgroundColor, Btns[0])
   } else {
     throw new Error(`Color Button not found: ${text}`);
   }

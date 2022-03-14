@@ -98,6 +98,7 @@ describe('Naya', () => {
 
   it('Login should succeeds and CreateSketch button exists', async () => {
     await clickBtnByText(page,"Login")
+    console.log("login button clicked and waiting for navigation")
     await page.waitForNavigation()
     await page.waitForXPath(`//button[contains(text(), "Logout")]`)
     let createSketchBtn = await getBtnByText(page, "Create a New Sketch")
@@ -106,9 +107,10 @@ describe('Naya', () => {
 
   it('Create sketch with name testSketch and save', async () => {
     await clickBtnByText(page,"Create a New Sketch")
+    console.log("Create a new sketch clicked and waiting for navigation")
     await page.waitForNavigation()
     await page.waitForXPath(`//button[contains(text(), "Save")]`)
-    await page.waitForXPath('//canvas[contains(@class,"upper-canvas")]')
+    await page.waitForXPath(`//canvas[contains(@class,"upper-canvas")]`)
     const canvasobj = await page.$x('//canvas[contains(@class,"upper-canvas")]')[0]
     //await canvasobj.click()
     await page.mouse.move(250,300)

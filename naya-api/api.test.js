@@ -13,7 +13,7 @@ const request = require("supertest");
 }) */
 
 describe('Post Endpoints', () => {
-  it('should create a new post', async () => {
+  it('should login user', async () => {
     const data = {
 		"username": "Surya123456",
 		"password": "Suriya123",
@@ -26,10 +26,18 @@ describe('Post Endpoints', () => {
     console.log(res.body)
     console.log(res.statusCode)
   })
+  
+  it('should get all sketches', async () => {
+    const res = await request(app)
+      .get('/api/allSketches')
+    expect(res.statusCode).toEqual(200)
+    console.log(res.body)
+    console.log(res.statusCode)
+  })
+  
 })
 
 afterAll(done => {
-  // Closing the DB connection allows Jest to exit successfully.
   app.close()
   done()
 })

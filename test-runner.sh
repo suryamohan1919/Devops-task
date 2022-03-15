@@ -1,7 +1,7 @@
-export REACT_APP_WEBURL=http://naya-web:3000
-export REACT_APP_APIURL=http://naya-api:8080
-export weburl=http://naya-web:3000
-export apiurl=http://naya-api:8080
+export REACT_APP_WEBURL=http://localhost:3000
+export REACT_APP_APIURL=http://localhost:8080
+export weburl=http://localhost:3000
+export apiurl=http://localhost:8080
 export MONGO_URI="mongodb+srv://surya:surya@cluster0.ijpqd.mongodb.net/TestDataBase?retryWrites=true&w=majority"
 testtype=$1
 if [[ $testtype = "e2e-tests" ]]

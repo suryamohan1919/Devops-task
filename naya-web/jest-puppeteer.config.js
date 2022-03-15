@@ -8,6 +8,7 @@ module.exports = {
       '--no-zygote',
       '--disable-dev-shm-usage',
       '--disable-gpu',
+      '--disable-web-security',
     ],
     }
 }

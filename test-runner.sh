@@ -1,9 +1,27 @@
 export REACT_APP_WEBURL=http://naya-web:3000
-export REACT_APP_APIURL=http://localhost:8080
+export REACT_APP_APIURL=http://naya-api:8080
 export weburl=http://naya-web:3000
-export apiurl=http://localhost:8080
+export apiurl=http://naya-api:8080
 export MONGO_URI="mongodb+srv://surya:surya@cluster0.ijpqd.mongodb.net/TestDataBase?retryWrites=true&w=majority"
 testtype=$1
+
+curl 'http://naya-api:8080/api/login' \
+  -H 'Connection: keep-alive' \
+  -H 'sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="99", "Google Chrome";v="99"' \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36' \
+  -H 'sec-ch-ua-platform: "Windows"' \
+  -H 'Origin: http://localhost:3000' \
+  -H 'Sec-Fetch-Site: same-site' \
+  -H 'Sec-Fetch-Mode: cors' \
+  -H 'Sec-Fetch-Dest: empty' \
+  -H 'Referer: http://localhost:3000/' \
+  -H 'Accept-Language: en-US,en;q=0.9' \
+  --data-raw '{"username":"surya","password":"surya123","color":"#6758b3"}' \
+  --compressed
+
 if [[ $testtype = "e2e-tests" ]]
 then
     echo "Running e2e-tests using headless chrome"

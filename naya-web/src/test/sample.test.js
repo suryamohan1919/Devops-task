@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer');
 //const WEBURL = "https://naya-web-moffh24q7a-uc.a.run.app/" ;
-const WEBURL = process.env.REACT_APP_WEBURL ; 
+const WEBURL = process.env.REACT_APP_WEBURL ;
 const APIURL = process.env.REACT_APP_APIURL ;
 
 const rgb2hex = (rgb) => `#${rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/).slice(1).map(n => parseInt(n, 10).toString(16).padStart(2, '0')).join('')}`
@@ -12,7 +12,7 @@ const escapeXpathString = str => {
 };
 
 function delay(time) {
-  return new Promise(function(resolve) { 
+  return new Promise(function(resolve) {
       setTimeout(resolve, time)
   });
 }
@@ -20,7 +20,7 @@ function delay(time) {
 const getBtnByText = async (page, text) => {
   const escapedText = escapeXpathString(text);
   const linkHandlers = await page.$x(`//button[contains(text(), ${escapedText})]`);
-  
+
   if (linkHandlers.length > 0) {
     return linkHandlers[0];
   } else {
@@ -31,7 +31,7 @@ const getBtnByText = async (page, text) => {
 const clickBtnByText = async (page, text) => {
   const escapedText = escapeXpathString(text);
   const linkHandlers = await page.$x(`//button[contains(text(), ${escapedText})]`);
-  
+
   if (linkHandlers.length > 0) {
     await linkHandlers[0].click();
   } else {
@@ -44,7 +44,7 @@ describe('Naya', () => {
   //const browser = await puppeteer.launch({ headless: false });
   //const page = await browser.newPage();
   beforeAll(async () => {
-    
+
     jest.setTimeout(140000)
     page.setDefaultNavigationTimeout(100000)
     page.setDefaultTimeout(100000)
@@ -83,22 +83,25 @@ describe('Naya', () => {
 
   it('Color picked is set as color button background', async () => {
     await clickBtnByText(page,"Your Favourite Color?");
-    const clrobj = await page.$('#rc-editable-input-2');
+    const clrobjs = await page.$x(`//input[@value="#22194D"]`);
+    const clrobj = clrobjs[0]
     await clrobj.click({ clickCount: 3 })
     await clrobj.type("#234567");
-    //await page.screenshot({path: 'screenshot.png'})
+    await page.screenshot({path: 'screenshot.png'})
     await clickBtnByText(page,"Your Favourite Color?");
     console.log("Color set")
+    await page.screenshot({path: 'screenshot1.png'});
     const escapedText = escapeXpathString("Your Favourite Color?");
     const Btns = await page.$x(`//button[contains(text(), ${escapedText})]`);
     let clrvalue;
   if (Btns.length > 0) {
     clrvalue = await page.evaluate(x => x.style.backgroundColor, Btns[0])
   } else {
-    throw new Error(`Color Button not found: ${text}`);
+    throw new Error(`Color Button not found: `);
   }
     //expect(rgb2hex(clrvalue)).toBe("#234567")
-    
+    console.log(clrvalue)
+    console.log(rgb2hex(clrvalue))
   })
 
   it('Login should succeeds and CreateSketch button exists', async () => {

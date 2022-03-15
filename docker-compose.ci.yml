@@ -1,8 +1,10 @@
 version: "3"
 services:
   naya-api:
+    network_mode: cloudbuild
     image: "gcr.io/${PROJECT_ID}/naya-api"
   naya-web:
+    network_mode: cloudbuild
     image: "gcr.io/${PROJECT_ID}/naya-web"
 networks:
   default:

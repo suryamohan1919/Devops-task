@@ -45,9 +45,9 @@ describe('Naya', () => {
   //const page = await browser.newPage();
   beforeAll(async () => {
     
-    jest.setTimeout(100000)
-    page.setDefaultNavigationTimeout(300000)
-    page.setDefaultTimeout(300000)
+    jest.setTimeout(120000)
+    page.setDefaultNavigationTimeout(100000)
+    page.setDefaultTimeout(100000)
     console.log(WEBURL)
     await page.goto(WEBURL)
   })

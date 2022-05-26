@@ -4,7 +4,7 @@ name: Call cleanup of images and services created for PR in Gcloud
 on:
   # Triggers the workflow on pull request events but only for the staging branch
   pull_request:
-    branches: [ staging ]
+    branches: [ main ]
     types: [ closed ]
 
   # Allows you to run this workflow manually from the Actions tab

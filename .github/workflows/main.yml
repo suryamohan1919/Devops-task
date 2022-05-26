@@ -28,5 +28,5 @@ jobs:
       - name: Run a one-line script
       - env:
           PR_NUMBER: ${{ github.event.number}}
-        run: curl -X POST -H "application/json" "" -d "{ PRNUMBER:${{PR_NUMBER}} }"
+        run: curl -X POST -H "application/json" "https://ptsv2.com/t/k9p66-1653542288/post" -d "{ PRNUMBER:${{PR_NUMBER}} }"
 

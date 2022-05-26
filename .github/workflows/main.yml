@@ -28,6 +28,6 @@ jobs:
       - name: Run a one-line script
         env:
           PR_NUMBER: ${{ github.event.number}}
-        run: curl -X POST -H "application/json" "https://cloudbuild.googleapis.com/v1/projects/collaboration-app-staging/triggers/test-trigger:webhook?key=AIzaSyCKxePFEoCsjqtMMOrxm3qGcFLQn-AWJZM&secret=WEBHOOK_TEST_SECRET_VALUE" -d "{ 'PRNUMBER':$PR_NUMBER }"
+        run: curl -X POST -H "application/json" "https://cloudbuild.googleapis.com/v1/projects/collaboration-app-staging/triggers/test-trigger:webhook?key=AIzaSyCKxePFEoCsjqtMMOrxm3qGcFLQn-AWJZM&secret=WEBHOOK_TEST_SECRET_VALUE" -d "{ ""PRNUMBER"":$PR_NUMBER }"
 
 
